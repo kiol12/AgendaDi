@@ -12,6 +12,8 @@ import javafx.beans.property.StringProperty;
 
 public class Person {
 
+
+    //Definimos las atributos que estan y vamos a utilizar del fxml con el mismo nombre que en el
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty street;
@@ -31,13 +33,15 @@ public class Person {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
 
-        // Some initial dummy data, just for convenient testing.
+        //Son datos de prueba para comprobar que funciona
         this.street = new SimpleStringProperty("some street");
         this.postalCode = new SimpleIntegerProperty(1234);
         this.city = new SimpleStringProperty("some city");
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
     }
 
+
+    //Los getters y setter de todos los atributos
     public String getFirstName() {
         return firstName.get();
     }

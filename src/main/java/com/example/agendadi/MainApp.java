@@ -20,6 +20,7 @@ public class MainApp extends Application {
     private ObservableList<Person> personData = FXCollections.observableArrayList();
 
     /*
+    La lista la rellenamos con datos para utilizar la aplicacion
      */
     public MainApp() {
         // Add some sample data
@@ -34,32 +35,37 @@ public class MainApp extends Application {
         personData.add(new Person("Martin", "Mueller"));
     }
 
-
+    //Devolvemos la lista entera
     public ObservableList<Person> getPersonData() {
         return personData;
     }
 
     @Override
     public void start(Stage primaryStage) {
+        //Cargamos el stage
         this.primaryStage = primaryStage;
+        //Le ponemos titulo a la ventana
         this.primaryStage.setTitle("AddressApp");
 
+        //Le asignamod la imagen seleccionada como icono de aplicaion
         this.primaryStage.getIcons().add(new Image("file:src/main/resources/com/example/agendadi/images/9036037_rocket_sharp_icon.png"));
 
+        //LLamamos a los distintos metodos
         initRootLayout();
 
         showPersonOverview();
     }
 
 
+    //Mostramos la ventana de vision de datos que es la inicial
     public void initRootLayout() {
         try {
-            // Load root layout from fxml file.
+            //Cargamos el rootLayout
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
-            // Show the scene containing the root layout.
+            //Mostramos la scene
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);   
             primaryStage.show();
@@ -68,25 +74,29 @@ public class MainApp extends Application {
         }
     }
 
+    //Para mostrar el menu de edicion
     public boolean showPersonEditDialog(Person person) {
         try {
-
+            //Cargamos el fxml del menu de edcion
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("PersonEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
-
+            //Le damos un titulo a la ventana que se crea y varias caracteristicas
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Person");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
+
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
+            //Le asignamos el controlador
             PersonEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setPerson(person);
 
+            //Lo mostramos y esperamos hasta que uno de los batones se haya pulsado
             dialogStage.showAndWait();
 
             return controller.isOkClicked();
@@ -97,17 +107,18 @@ public class MainApp extends Application {
     }
 
 
+    //Muestra la clase PersonOverview
     public void showPersonOverview() {
         try {
-            // Load person overview.
+            // Coargamos la clase
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("PersonOverview.fxml"));
             AnchorPane personOverview = (AnchorPane) loader.load();
 
-
+            //Lo ponemos en el centro de la ventana
             rootLayout.setCenter(personOverview);
 
-
+            //Le asiganamos su control
             PersonOverviewController controller = loader.getController();
             controller.setMainApp(this);
 
@@ -117,10 +128,12 @@ public class MainApp extends Application {
     }
 
 
+    //Para recoger el stage indicado
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    //Para arrancar la aplicacion
     public static void main(String[] args) {
         launch(args);
     }

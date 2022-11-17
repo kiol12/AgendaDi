@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 public class PersonEditDialogController {
 
+    //Atributos
     @FXML
     private TextField firstNameField;
     @FXML
@@ -36,10 +37,13 @@ public class PersonEditDialogController {
     /*
      * @param dialogStage
      */
+
+    //crea el stage
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
+    //A la hora de editar una persona rellena todos los labels pasandole la persona seleccionada
     public void setPerson(Person person) {
         this.person = person;
 
@@ -53,10 +57,13 @@ public class PersonEditDialogController {
     }
 
 
+    //Comprobamos si se hace click
     public boolean isOkClicked() {
         return okClicked;
     }
 
+
+    //Comprobamos que quiere guardar los cambios tras haber comprobado que son validos
     @FXML
     private void handleOk() {
         if (isInputValid()) {
@@ -72,6 +79,7 @@ public class PersonEditDialogController {
         }
     }
 
+    //Si desea no editar la persona se sale del menu de edicion
     @FXML
     private void handleCancel() {
         dialogStage.close();
@@ -82,6 +90,7 @@ public class PersonEditDialogController {
      *
      * @return true if the input is valid
      */
+    //Comprobamos que los datos introducidos son correctos si no salta alerta
     private boolean isInputValid() {
         String errorMessage = "";
 

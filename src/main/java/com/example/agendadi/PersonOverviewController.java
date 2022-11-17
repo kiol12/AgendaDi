@@ -7,6 +7,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class PersonOverviewController {
+
+    //Atributos del fxml
     @FXML
     private TableView<Person> personTable;
     @FXML
@@ -33,12 +35,17 @@ public class PersonOverviewController {
     public PersonOverviewController() {
     }
 
+
+    //Para coger los datos de nombre y apellido
     @FXML
     private void initialize() {
         // Initialize the person table with the two columns.
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
     }
+
+
+    //Para compobar si se ha seleccionado y si asi en lo borra
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
@@ -56,6 +63,8 @@ public class PersonOverviewController {
         }
     }
 
+
+    //Para agragar uno nueva persona
     @FXML
     private void handleNewPerson() {
         Person tempPerson = new Person();
@@ -69,6 +78,8 @@ public class PersonOverviewController {
      * Called when the user clicks the edit button. Opens a dialog to edit
      * details for the selected person.
      */
+
+    //Para editar las persona que seleccionemos y si no se selecciona salta alerta
     @FXML
     private void handleEditPerson() {
         Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
@@ -90,9 +101,10 @@ public class PersonOverviewController {
         }
     }
 
+    //Para mostrar todos los datos de cada persona si no existe no muestra nada
     private void showPersonDetails(Person person) {
         if (person != null) {
-            // Fill the labels with info from the person object.
+
             firstNameLabel.setText(person.getFirstName());
             lastNameLabel.setText(person.getLastName());
             streetLabel.setText(person.getStreet());
@@ -102,7 +114,7 @@ public class PersonOverviewController {
             birthdayLabel.setText(DateUtil.format(person.getBirthday()));
             // birthdayLabel.setText(...);
         } else {
-            // Person is null, remove all the text.
+
             firstNameLabel.setText("");
             lastNameLabel.setText("");
             streetLabel.setText("");
