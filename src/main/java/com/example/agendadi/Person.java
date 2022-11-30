@@ -9,6 +9,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 
 public class Person {
 
@@ -38,6 +40,10 @@ public class Person {
         this.postalCode = new SimpleIntegerProperty(1234);
         this.city = new SimpleStringProperty("some city");
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+    }
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public LocalDate getBirthday() {
+        return birthday.get();
     }
 
 
@@ -102,9 +108,6 @@ public class Person {
         return city;
     }
 
-    public LocalDate getBirthday() {
-        return birthday.get();
-    }
 
     public void setBirthday(LocalDate birthday) {
         this.birthday.set(birthday);
